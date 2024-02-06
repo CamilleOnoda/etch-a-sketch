@@ -1,0 +1,18 @@
+body {
+    display: flex;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    width: 600px;
+    height: 600px;
+}
+
+.squares {
+    width: 38px;
+    border-top: 1px black solid;
+    border-right: 1px black solid;
+    border-left: 1px black solid;
+    border-bottom: 1px black solid;
+}
