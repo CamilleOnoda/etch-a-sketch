@@ -4,6 +4,11 @@ body {
     justify-content: center;
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+}
+
 .grid, .squares {
     border: 1px solid black;
 }
