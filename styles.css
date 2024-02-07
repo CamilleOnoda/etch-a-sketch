@@ -1,12 +1,24 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin: 0;
+}
+
+.display-options {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: steelblue;
 }
 
 .container {
     display: flex;
     justify-content: center;
+    background: silver;
 }
 
 .grid, .squares {
@@ -16,16 +28,21 @@ body {
 .grid {
     display: flex;
     flex-wrap: wrap;
-    width: 600px;
-    height: 600px;
+    width: 572px;
+    height: 572px;
+    background-color: white;
 }
 
 .squares {
     width: 38px;
 }
 
-.display-options {
+.color {
     display: flex;
-    justify-content: space-evenly;
+    align-items: center;
+    gap: 0.5rem;
 }
 
+input {
+    cursor: pointer;
+}
