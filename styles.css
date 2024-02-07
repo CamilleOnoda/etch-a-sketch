@@ -13,6 +13,19 @@ body {
     display: flex;
     justify-content: space-evenly;
     background-color: steelblue;
+    align-items: center;
+}
+
+.color {
+    gap: 0.5rem;
+}
+
+label {
+    font-weight: bold;
+}
+
+input {
+    cursor: pointer;
 }
 
 .container {
@@ -35,14 +48,4 @@ body {
 
 .squares {
     width: 38px;
-}
-
-.color {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-input {
-    cursor: pointer;
 }
