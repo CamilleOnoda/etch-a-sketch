@@ -1,5 +1,6 @@
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
@@ -17,3 +18,9 @@ body {
 .squares {
     width: 38px;
 }
+
+.display-options {
+    display: flex;
+    justify-content: space-evenly;
+}
+
