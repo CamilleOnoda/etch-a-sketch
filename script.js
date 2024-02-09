@@ -1,3 +1,5 @@
+
+
 function createGrid() {
     let gridSize = 256; //16x16
 
@@ -7,7 +9,7 @@ function createGrid() {
         let square = document.createElement('div');
         square.classList.add('squares');
         grid.appendChild(square);
-    }
+    };
 };
 
 function getSelectedPen(e) {
@@ -24,7 +26,13 @@ function getSelectedBrush(e) {
     console.log(selectedcolorBrush);
     colorBrush.value = selectedcolorBrush;
     changeBackgroundBrush(selectedcolorBrush);
-}
+};
+
+function mouseOverHandler(selectedcolorBrush) {
+    return function(event) {
+        event.target.style.backgroundColor = selectedcolorBrush;
+    };
+};
 
 function changeBackgroundPen(selectedColorPen) {
     let gridSquares = document.querySelectorAll('.squares');
@@ -38,13 +46,18 @@ function changeBackgroundPen(selectedColorPen) {
 
 function changeBackgroundBrush(selectedcolorBrush) {
     let gridSquares = document.querySelectorAll('.squares');
+    let mouseOverListener = mouseOverHandler(selectedcolorBrush);
+
     gridSquares.forEach(square => {
-        square.addEventListener('mouseover', () => {
-            console.log(selectedcolorBrush);
-            square.style.backgroundColor = selectedcolorBrush;
-        })
-    })
-}
+        square.addEventListener('mouseover', mouseOverListener);
+    });
+
+    document.querySelector('.grid').addEventListener('click', () => {
+        gridSquares.forEach(square => {
+            square.removeEventListener('mouseover', mouseOverListener);
+        });
+    });
+};
 
 colorPen.addEventListener('input', getSelectedPen);
 colorBrush.addEventListener('input', getSelectedBrush);
