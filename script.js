@@ -10,22 +10,42 @@ function createGrid() {
     }
 };
 
-function getSelectedColor(e) {
-    let colorPicker = document.querySelector('#colorPicker');
-    let selectedColor = e.currentTarget.value;
-    colorPicker.value = selectedColor;
-    changeBackgroundColor(selectedColor);
+function getSelectedPen(e) {
+    let colorPen = document.querySelector('#colorPen');
+    let selectedColorPen = e.currentTarget.value;
+    console.log(selectedColorPen);
+    colorPen.value = selectedColorPen;
+    changeBackgroundPen(selectedColorPen);
 };
 
-function changeBackgroundColor(selectedColor) {
+function getSelectedBrush(e) {
+    let colorBrush = document.querySelector('#colorBrush');
+    let selectedcolorBrush = e.currentTarget.value;
+    console.log(selectedcolorBrush);
+    colorBrush.value = selectedcolorBrush;
+    changeBackgroundBrush(selectedcolorBrush);
+}
+
+function changeBackgroundPen(selectedColorPen) {
     let gridSquares = document.querySelectorAll('.squares');
     gridSquares.forEach(square => {
         square.addEventListener('click', () => {
-            console.log(selectedColor);
-            square.style.backgroundColor = selectedColor;
+            console.log(selectedColorPen);
+            square.style.backgroundColor = selectedColorPen;
         });
     });
 };
 
-colorPicker.addEventListener('input', getSelectedColor);
+function changeBackgroundBrush(selectedcolorBrush) {
+    let gridSquares = document.querySelectorAll('.squares');
+    gridSquares.forEach(square => {
+        square.addEventListener('mouseover', () => {
+            console.log(selectedcolorBrush);
+            square.style.backgroundColor = selectedcolorBrush;
+        })
+    })
+}
+
+colorPen.addEventListener('input', getSelectedPen);
+colorBrush.addEventListener('input', getSelectedBrush);
 createGrid();
