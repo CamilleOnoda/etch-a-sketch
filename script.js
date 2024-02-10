@@ -46,6 +46,13 @@ function changeBackgroundPen(selectedColorPen) {
     gridSquares.forEach(square => {
         square.addEventListener('click', clickListener);
     });
+
+    document.querySelector('.grid').addEventListener('dblclick', (event) => {
+        gridSquares.forEach(square => {
+            square.removeEventListener('click', clickListener);
+            event.target.style.backgroundColor = "";
+        });
+    });
 };
 
 function changeBackgroundBrush(selectedcolorBrush) {
