@@ -1,5 +1,3 @@
-
-
 function createGrid() {
     let gridSize = 256; //16x16
 
@@ -34,13 +32,19 @@ function mouseOverHandler(selectedcolorBrush) {
     };
 };
 
+function clickHandler(selectedColorPen) {
+    return function(event) {
+        event.target.style.backgroundColor = selectedColorPen;
+    };
+};
+
 function changeBackgroundPen(selectedColorPen) {
+    console.log("Change Background Pen function called");
     let gridSquares = document.querySelectorAll('.squares');
+    let clickListener = clickHandler(selectedColorPen);
+
     gridSquares.forEach(square => {
-        square.addEventListener('click', () => {
-            console.log(selectedColorPen);
-            square.style.backgroundColor = selectedColorPen;
-        });
+        square.addEventListener('click', clickListener);
     });
 };
 
@@ -52,13 +56,20 @@ function changeBackgroundBrush(selectedcolorBrush) {
         square.addEventListener('mouseover', mouseOverListener);
     });
 
-    document.querySelector('.grid').addEventListener('click', () => {
+    document.querySelector('.grid').addEventListener('dblclick', (event) => {
         gridSquares.forEach(square => {
             square.removeEventListener('mouseover', mouseOverListener);
+            event.target.style.backgroundColor = "";
         });
     });
 };
 
+function restart() {
+        location.reload();
+};
+
+
 colorPen.addEventListener('input', getSelectedPen);
 colorBrush.addEventListener('input', getSelectedBrush);
+restartButton.addEventListener('click', restart);
 createGrid();
