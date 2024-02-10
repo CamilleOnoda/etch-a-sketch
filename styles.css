@@ -11,6 +11,7 @@ body {
 
 .display-options {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     background-color: steelblue;
     align-items: center;
@@ -31,7 +32,6 @@ input {
 .container {
     display: flex;
     justify-content: center;
-    background: silver;
 }
 
 .grid, .squares {
@@ -43,7 +43,6 @@ input {
     flex-wrap: wrap;
     width: 572px;
     height: 572px;
-    background-color: white;
 }
 
 .squares {
