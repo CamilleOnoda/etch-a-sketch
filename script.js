@@ -10,6 +10,7 @@ function createGrid() {
     };
 };
 
+
 function getSelectedPen(e) {
     let colorPen = document.querySelector('#colorPen');
     let selectedColorPen = e.currentTarget.value;
@@ -17,6 +18,7 @@ function getSelectedPen(e) {
     colorPen.value = selectedColorPen;
     changeBackgroundPen(selectedColorPen);
 };
+
 
 function getSelectedBrush(e) {
     let colorBrush = document.querySelector('#colorBrush');
@@ -26,11 +28,6 @@ function getSelectedBrush(e) {
     changeBackgroundBrush(selectedcolorBrush);
 };
 
-function mouseOverHandler(selectedcolorBrush) {
-    return function(event) {
-        event.target.style.backgroundColor = selectedcolorBrush;
-    };
-};
 
 function clickHandler(selectedColorPen) {
     return function(event) {
@@ -38,8 +35,8 @@ function clickHandler(selectedColorPen) {
     };
 };
 
+
 function changeBackgroundPen(selectedColorPen) {
-    console.log("Change Background Pen function called");
     let gridSquares = document.querySelectorAll('.squares');
     let clickListener = clickHandler(selectedColorPen);
 
@@ -55,21 +52,37 @@ function changeBackgroundPen(selectedColorPen) {
     });
 };
 
+
 function changeBackgroundBrush(selectedcolorBrush) {
     let gridSquares = document.querySelectorAll('.squares');
-    let mouseOverListener = mouseOverHandler(selectedcolorBrush);
+    let isDragging = false;
+
+    function startDrag() {
+        isDragging = true;
+    };
+
+    function endDrag() {
+        isDragging = false;
+    };
+
+    function handleDrag(square) {
+        return function() {
+            if(isDragging) {
+                square.style.backgroundColor = selectedcolorBrush;
+            }
+        };
+    }
 
     gridSquares.forEach(square => {
-        square.addEventListener('mouseover', mouseOverListener);
+        square.addEventListener('mousedown', startDrag);
+        square.addEventListener('mouseup', endDrag);
+        square.addEventListener('mouseover', handleDrag(square));
     });
 
-    document.querySelector('.grid').addEventListener('dblclick', (event) => {
-        gridSquares.forEach(square => {
-            square.removeEventListener('mouseover', mouseOverListener);
-            event.target.style.backgroundColor = "";
-        });
-    });
-};
+    document.addEventListener('mouseup', endDrag);
+
+}
+
 
 function restart() {
         location.reload();
