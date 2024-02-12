@@ -32,6 +32,7 @@ input {
 .container {
     display: flex;
     justify-content: center;
+    background: grey;
 }
 
 .grid, .squares {
@@ -43,6 +44,7 @@ input {
     flex-wrap: wrap;
     width: 572px;
     height: 572px;
+    background-color: white;
 }
 
 .squares {
