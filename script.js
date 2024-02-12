@@ -55,32 +55,62 @@ function changeBackgroundPen(selectedColorPen) {
 
 function changeBackgroundBrush(selectedcolorBrush) {
     let gridSquares = document.querySelectorAll('.squares');
-    let isDragging = false;
+    let isPainting = false;
 
-    function startDrag() {
-        isDragging = true;
+    function startPaint() {
+        isPainting = true;
     };
 
-    function endDrag() {
-        isDragging = false;
+    function endPaint() {
+        isPainting = false;
     };
 
-    function handleDrag(square) {
+    function handlePaint(square) {
         return function() {
-            if(isDragging) {
+            if(isPainting) {
                 square.style.backgroundColor = selectedcolorBrush;
             }
         };
     }
 
     gridSquares.forEach(square => {
-        square.addEventListener('mousedown', startDrag);
-        square.addEventListener('mouseup', endDrag);
-        square.addEventListener('mouseover', handleDrag(square));
+        square.addEventListener('mousedown', startPaint);
+        square.addEventListener('mouseup', endPaint);
+        square.addEventListener('mouseover', handlePaint(square));
     });
 
-    document.addEventListener('mouseup', endDrag);
+    document.addEventListener('mouseup', endPaint);
+}
 
+function erase() {
+    let gridSquares = document.querySelectorAll('.squares');
+    let isErasing = false;
+
+    function startErase() {
+        isErasing = true;
+    };
+
+    function endErase() {
+        isErasing = false;
+    };
+
+    function handleErase(square) {
+        console.log('handleErase triggered')
+        return function () {
+            if(isErasing) {
+                console.log('is erasing')
+                square.style.backgroundColor = "";
+            }
+        };
+    }
+
+    gridSquares.forEach(square => {
+        square.addEventListener('mousedown', startErase);
+        square.addEventListener('mouseup', endErase);
+        square.addEventListener('mouseover', handleErase(square));
+    });
+    
+    document.addEventListener('mouseup', endErase);
 }
 
 
@@ -92,4 +122,8 @@ function restart() {
 colorPen.addEventListener('input', getSelectedPen);
 colorBrush.addEventListener('input', getSelectedBrush);
 restartButton.addEventListener('click', restart);
+
+let eraser = document.querySelector('#eraser');
+eraser.addEventListener('click', erase);
+
 createGrid();
