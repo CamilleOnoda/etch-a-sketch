@@ -12,14 +12,22 @@ body {
 .display-options {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    background-color: steelblue;
     align-items: center;
-    gap: 25px;
+    width: min-content;
+    margin-right: 30px;
+    margin-left: 30px;
 }
 
 .color {
+    display: flex;
+    flex-direction: column;
     gap: 0.5rem;
+}
+
+button {
+    padding: 15px;
+    border-radius: 50%;
+    background-color: aliceblue;
 }
 
 label {
@@ -45,7 +53,6 @@ input {
 
 .container {
     display: flex;
-    justify-content: center;
     background: grey;
 }
 
