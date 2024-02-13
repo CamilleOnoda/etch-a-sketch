@@ -134,19 +134,30 @@ function erase() {
 }
 
 
-function randomizeColor() {
-    let gridSquares = document.querySelectorAll('.squares');
-    const randomRgbColor = () => {
-        let r = Math.floor(Math.random() * 256);
-        let g = Math.floor(Math.random() * 256);
-        let b = Math.floor(Math.random() * 256);
-        return 'rgb(' + r + ',' + g + ',' + b + ')';
-      };
+function handleGridColor(event) {
+    const gridSquares = document.querySelectorAll('.squares');
+    const buttonClicked = event.target;
 
-      gridSquares.forEach(square => {
-        square.style.backgroundColor = randomRgbColor();
-      })
+    if(buttonClicked.id === 'randomSquare') {
+        gridSquares.forEach(square => {
+            square.addEventListener('click', function() {
+                square.style.backgroundColor = randomRgbColor();
+            });
+        });
+    } else {
+        gridSquares.forEach(square => {
+            square.style.backgroundColor = randomRgbColor();
+        })
+    }
 }
+
+
+function randomRgbColor() {
+    let r = Math.floor(Math.random() * 256);
+    let g = Math.floor(Math.random() * 256);
+    let b = Math.floor(Math.random() * 256);
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
+  };
 
 
 function restart() {
@@ -161,7 +172,10 @@ restartButton.addEventListener('click', restart);
 let eraser = document.querySelector('#eraser');
 eraser.addEventListener('click', erase);
 
-let random = document.querySelector('#random');
-random.addEventListener('click', randomizeColor);
+let randomColorBtns = document.querySelectorAll('.randomColorBtn');
+randomColorBtns.forEach(button => {
+    button.addEventListener('click', handleGridColor);
+})
+
 
 GetGridSize();
