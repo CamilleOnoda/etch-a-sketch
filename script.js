@@ -1,4 +1,12 @@
 function createGrid() {
+    const slideValue = document.querySelector("span");
+    const inputSlider = document.querySelector("#size-range");
+
+    inputSlider.oninput = () => {
+        let value = inputSlider.value;
+        slideValue.textContent = value;
+    }
+
     let gridSize = 256; //16x16
 
     let grid = document.querySelector('.grid');
@@ -82,6 +90,7 @@ function changeBackgroundBrush(selectedcolorBrush) {
     document.addEventListener('mouseup', endPaint);
 }
 
+
 function erase() {
     let gridSquares = document.querySelectorAll('.squares');
     let isErasing = false;
@@ -95,7 +104,6 @@ function erase() {
     };
 
     function handleErase(square) {
-        console.log('handleErase triggered')
         return function () {
             if(isErasing) {
                 console.log('is erasing')
