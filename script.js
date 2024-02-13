@@ -134,6 +134,21 @@ function erase() {
 }
 
 
+function randomizeColor() {
+    let gridSquares = document.querySelectorAll('.squares');
+    const randomRgbColor = () => {
+        let r = Math.floor(Math.random() * 256);
+        let g = Math.floor(Math.random() * 256);
+        let b = Math.floor(Math.random() * 256);
+        return 'rgb(' + r + ',' + g + ',' + b + ')';
+      };
+
+      gridSquares.forEach(square => {
+        square.style.backgroundColor = randomRgbColor();
+      })
+}
+
+
 function restart() {
         location.reload();
 };
@@ -145,5 +160,8 @@ restartButton.addEventListener('click', restart);
 
 let eraser = document.querySelector('#eraser');
 eraser.addEventListener('click', erase);
+
+let random = document.querySelector('#random');
+random.addEventListener('click', randomizeColor);
 
 GetGridSize();
