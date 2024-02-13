@@ -137,8 +137,30 @@ function erase() {
 function handleGridColor(event) {
     const gridSquares = document.querySelectorAll('.squares');
     const buttonClicked = event.target;
+    console.log(buttonClicked);
 
-    if(buttonClicked.id === 'randomSquare') {
+    gridSquares.forEach(square => {
+        square.removeEventListener('click', square.clickListener);
+    });
+
+    if(buttonClicked.id === 'darkerColor') {
+        gridSquares.forEach(square => {
+            const currentColor = square.style.backgroundColor;
+            const darkenedColor = darkenColor(currentColor, 10);
+            square.addEventListener('click', function() {
+                square.style.backgroundColor = darkenedColor;
+            });
+        });
+    } else if(buttonClicked.id === 'brighterColor') {
+        gridSquares.forEach(square => {
+            const currentColor = square.style.backgroundColor;
+            const brightenedColor = brightenColor(currentColor, 10);
+            square.addEventListener('click', function() {
+                console.log('Cicked')
+                square.style.backgroundColor = brightenedColor;
+            })
+        });
+    } else if(buttonClicked.id === 'randomSquare') {
         gridSquares.forEach(square => {
             square.addEventListener('click', function() {
                 square.style.backgroundColor = randomRgbColor();
@@ -147,17 +169,36 @@ function handleGridColor(event) {
     } else {
         gridSquares.forEach(square => {
             square.style.backgroundColor = randomRgbColor();
-        })
+        });
     }
+}
+    
+
+function randomRgbColor() {
+    let r = Math.floor(Math.random() * 255);
+    let g = Math.floor(Math.random() * 255);
+    let b = Math.floor(Math.random() * 255);
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
 }
 
 
-function randomRgbColor() {
-    let r = Math.floor(Math.random() * 256);
-    let g = Math.floor(Math.random() * 256);
-    let b = Math.floor(Math.random() * 256);
-    return 'rgb(' + r + ',' + g + ',' + b + ')';
-  };
+function darkenColor(color, percent) {
+    const [r, g, b] = color.split(',').map(Number);
+    const darkerR = Math.max(0, Math.floor(r * (1 - percent / 100)));
+    const darkerG = Math.max(0, Math.floor(g * (1 - percent / 100)));
+    const darkerB = Math.max(0, Math.floor(b * (1 - percent / 100)));
+    return `rgb(${darkerR}, ${darkerG}, ${darkerB})`;
+}
+
+
+function brightenColor(color, percent) {
+    const [r, g, b] = color.split(',').map(Number);
+    const brighterR = Math.min(255, Math.floor(r + (255 - r) * (percent / 100)));
+    const brighterG = Math.min(255, Math.floor(g + (255 - g) * (percent / 100)));
+    const brighterB = Math.min(255, Math.floor(b + (255 - b) * (percent / 100)));
+    return `rgb(${brighterR}, ${brighterG}, ${brighterB})`;
+}
+
 
 
 function restart() {
@@ -172,8 +213,8 @@ restartButton.addEventListener('click', restart);
 let eraser = document.querySelector('#eraser');
 eraser.addEventListener('click', erase);
 
-let randomColorBtns = document.querySelectorAll('.randomColorBtn');
-randomColorBtns.forEach(button => {
+let colorBtns = document.querySelectorAll('.colorBtn');
+colorBtns.forEach(button => {
     button.addEventListener('click', handleGridColor);
 })
 
