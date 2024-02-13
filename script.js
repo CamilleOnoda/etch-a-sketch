@@ -1,21 +1,29 @@
-function createGrid() {
+function GetGridSize() {
     const slideValue = document.querySelector("span");
     const inputSlider = document.querySelector("#size-range");
 
     inputSlider.oninput = () => {
         let value = inputSlider.value;
         slideValue.textContent = value;
-    }
+        createGrid(value);
+            };
 
-    let gridSize = 256; //16x16
+        function createGrid(value) {
+            let grid = document.querySelector('.grid');
+            let gridWidth = grid.offsetWidth;
+            console.log(gridWidth);
+            let squareSize = gridWidth / value;
+            let numberOfSquares = value * value;
 
-    let grid = document.querySelector('.grid');
+            grid.textContent = "";
 
-    for (i = 0; i < gridSize - 1; i++) {
-        let square = document.createElement('div');
-        square.classList.add('squares');
-        grid.appendChild(square);
-    };
+            for (i = 0; i < numberOfSquares - 1; i++) {
+                let square = document.createElement('div');
+                square.classList.add('squares');
+                square.style.width = squareSize +"px";
+                grid.appendChild(square);
+            };
+        };
 };
 
 
@@ -134,4 +142,4 @@ restartButton.addEventListener('click', restart);
 let eraser = document.querySelector('#eraser');
 eraser.addEventListener('click', erase);
 
-createGrid();
+GetGridSize();
