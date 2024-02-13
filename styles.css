@@ -30,6 +30,19 @@ input {
     cursor: pointer;
 }
 
+#size {
+    cursor: ew-resize;
+}
+
+#sizeSlider {
+    display: flex;
+}
+
+.current-value {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .container {
     display: flex;
     justify-content: center;
