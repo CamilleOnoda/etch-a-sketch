@@ -103,37 +103,6 @@ function changeBackgroundBrush(selectedcolorBrush) {
 }
 
 
-function erase() {
-    let gridSquares = document.querySelectorAll('.squares');
-    let isErasing = false;
-
-    function startErase() {
-        isErasing = true;
-    };
-
-    function endErase() {
-        isErasing = false;
-    };
-
-    function handleErase(square) {
-        return function () {
-            if(isErasing) {
-                console.log('is erasing')
-                square.style.backgroundColor = "";
-            }
-        };
-    }
-
-    gridSquares.forEach(square => {
-        square.addEventListener('mousedown', startErase);
-        square.addEventListener('mouseup', endErase);
-        square.addEventListener('mouseover', handleErase(square));
-    });
-    
-    document.addEventListener('mouseup', endErase);
-}
-
-
 function handleGridColor(event) {
     const gridSquares = document.querySelectorAll('.squares');
     const buttonClicked = event.target;
@@ -171,6 +140,36 @@ function handleGridColor(event) {
             square.style.backgroundColor = randomRgbColor();
         });
     }
+}
+
+
+function eraseClickandDrag() {
+    let gridSquares = document.querySelectorAll('.squares');
+    let isErasing = false;
+
+    function startErase() {
+        isErasing = true;
+    };
+
+    function endErase() {
+        isErasing = false;
+    };
+
+    function handleErase(square) {
+        return function () {
+            if(isErasing) {
+                square.style.backgroundColor = "";
+            }
+        };
+    }
+
+    gridSquares.forEach(square => {
+        square.addEventListener('mousedown', startErase);
+        square.addEventListener('mouseup', endErase);
+        square.addEventListener('mouseover', handleErase(square));
+    });
+    
+    document.addEventListener('mouseup', endErase);
 }
     
 
@@ -211,7 +210,7 @@ colorBrush.addEventListener('input', getSelectedBrush);
 restartButton.addEventListener('click', restart);
 
 let eraser = document.querySelector('#eraser');
-eraser.addEventListener('click', erase);
+eraser.addEventListener('click', eraseClickandDrag);
 
 let colorBtns = document.querySelectorAll('.colorBtn');
 colorBtns.forEach(button => {
