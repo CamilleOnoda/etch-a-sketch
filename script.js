@@ -11,19 +11,23 @@ function GetGridSize() {
         function createGrid(value) {
             let grid = document.querySelector('.grid');
             let gridWidth = grid.offsetWidth;
-            console.log(gridWidth);
-            let squareSize = gridWidth / value;
+            let squareSize = Math.floor(gridWidth / value);
             let numberOfSquares = value * value;
 
             grid.textContent = "";
 
-            for (i = 0; i < numberOfSquares - 1; i++) {
+            for (let i = 0; i < numberOfSquares; i++) {
                 let square = document.createElement('div');
                 square.classList.add('squares');
-                square.style.width = squareSize +"px";
-                grid.appendChild(square);
-            };
-        };
+
+                if((i + 1) % value === 0) {
+                    square.style.width = squareSize + "px";
+                } else {
+                    square.style.width = squareSize +"px";
+                }
+            grid.appendChild(square);
+            }
+        }
 };
 
 
