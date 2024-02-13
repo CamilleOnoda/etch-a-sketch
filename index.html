@@ -9,37 +9,38 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <div class="display-options">
-            <button type="button" id="restartButton">Restart</button>
-            <button type="button" id="eraser">Eraser</button>
-            <form>
-                <div class="current-value">
-                    <label for="size">Grid size</label>
-                    <div class="slider-value">
-                        <span></span>
+        <div class="container">
+            <div class="display-options">
+                <button type="button" id="restartButton">Restart</button>
+                <button type="button" id="eraser">Eraser (Click and drag)</button>
+                <form>
+                    <div class="current-value">
+                        <label for="size">Grid size</label>
+                        <div class="slider-value">
+                            <span></span>
+                        </div>
                     </div>
-                </div>
-                <div id="sizeSlider">
-                    <div class="value-left">16</div>
-                    <input type="range" id="size-range" name="size" value="20" min="16" max="50" steps="1">
-                    <div class="value-right">50</div>
-                </div>
-            </form>
-            <div class="color">
-                <label for="color-pen">Pen</label>
-                <input type="color" id="colorPen" value="#000002">
-                <label for="color-brush">Brush</label>
-                <input type="color" id="colorBrush" value="#000002">
-            </div>            
-            <button type="button" class="randomColorBtn" id="randomGrid">Random color (entire grid)</button>
-            <button type="button" class="randomColorBtn" id="randomSquare">Random color (square)</button>
-            <h3>Darkening</h3>
-            <h3>Brightening</h3>
-        </div>
-
-            <div class="container">
-                <div class="grid"></div>
+                    <div id="sizeSlider">
+                        <div class="value-left">16</div>
+                        <input type="range" id="size-range" name="size" value="20" min="16" max="50" steps="1">
+                        <div class="value-right">50</div>
+                    </div>
+                </form>
+                <div class="color">
+                    <label for="color-pen">Pen</label>
+                    <input type="color" id="colorPen" value="#000002">
+                    <label for="color-brush">Brush (Click and drag)</label>
+                    <input type="color" id="colorBrush" value="#000002">
+                </div>            
+                <button type="button" class="colorBtn" id="randomGrid">Random color (entire grid)</button>
+                <button type="button" class="colorBtn" id="randomSquare">Random color (single square)</button>
+                <!--
+                <button type="button" class="colorBtn" id="darkerColor">Darken</button>
+                <button type="button" class="colorBtn" id="brighterColor">Brighten</button>
+                -->
             </div>
+                <div class="grid"></div>
+        </div>
 
         <script src="script.js" async defer></script>
     </body>
