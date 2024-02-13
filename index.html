@@ -12,7 +12,19 @@
         <div class="display-options">
             <button type="button" id="restartButton">Restart</button>
             <button type="button" id="eraser">Eraser</button>
-            <h3>Grid size</h3>
+            <form>
+                <div class="current-value">
+                    <label for="size">Grid size</label>
+                    <div class="slider-value">
+                        <span>40</span>
+                    </div>
+                </div>
+                <div id="sizeSlider">
+                    <div class="value-left">16</div>
+                    <input type="range" id="size-range" name="size" value="40" min="16" max="100" steps="1">
+                    <div class="value-right">100</div>
+                </div>
+            </form>
             <div class="color">
                 <label for="color-pen">Pen</label>
                 <input type="color" id="colorPen" value="#000002">
