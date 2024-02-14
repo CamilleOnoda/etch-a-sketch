@@ -104,20 +104,20 @@ function handleRandomColor(event) {
 
     if(buttonClicked.id === 'darkerColor') {
         gridSquares.forEach(square => {
+            let currentColor = square.style.backgroundColor;
             square.addEventListener('click', function () {
-                let currentColor = square.style.backgroundColor;
                 let darkenedColor = darkenColor(currentColor, 10);
                 square.style.backgroundColor = darkenedColor;
+                currentColor = darkenedColor;
             });
         });
     } else if(buttonClicked.id === 'brighterColor') {
         gridSquares.forEach(square => {
+            let currentColor = square.style.backgroundColor;
             square.addEventListener('click', function () {
-                let currentColor = square.style.backgroundColor;
-                console.log(currentColor);
                 let brightenedColor = brightenColor(currentColor, 10);
-                console.log(brightenedColor);
                 square.style.backgroundColor = brightenedColor;
+                currentColor = brightenedColor;
             });
         });
     } else if(buttonClicked.id === 'randomSquare') {
