@@ -34,7 +34,6 @@ function GetGridSize() {
 function getSelectedPen(e) {
     let colorPen = document.querySelector('#colorPen');
     let selectedColorPen = e.currentTarget.value;
-    console.log(selectedColorPen);
     colorPen.value = selectedColorPen;
     changeBackgroundPen(selectedColorPen);
 };
@@ -43,34 +42,27 @@ function getSelectedPen(e) {
 function getSelectedBrush(e) {
     let colorBrush = document.querySelector('#colorBrush');
     let selectedcolorBrush = e.currentTarget.value;
-    console.log(selectedcolorBrush);
     colorBrush.value = selectedcolorBrush;
     changeBackgroundBrush(selectedcolorBrush);
 };
 
 
-function clickHandler(selectedColorPen) {
-    return function(event) {
-        event.target.style.backgroundColor = selectedColorPen;
-    };
-};
-
-
 function changeBackgroundPen(selectedColorPen) {
     let gridSquares = document.querySelectorAll('.squares');
-    let clickListener = clickHandler(selectedColorPen);
 
+    function clickHandler(selectedColorPen) {
+        return function(event) {
+            event.target.style.backgroundColor = selectedColorPen;
+        };
+    }
+
+    let clickListener = clickHandler(selectedColorPen);
     gridSquares.forEach(square => {
         square.addEventListener('click', clickListener);
     });
 
-    document.querySelector('.grid').addEventListener('dblclick', (event) => {
-        gridSquares.forEach(square => {
-            square.removeEventListener('click', clickListener);
-            event.target.style.backgroundColor = "";
-        });
-    });
-};
+
+}
 
 
 function changeBackgroundBrush(selectedcolorBrush) {
@@ -103,10 +95,9 @@ function changeBackgroundBrush(selectedcolorBrush) {
 }
 
 
-function handleGridColor(event) {
+function handleRandomColor(event) {
     const gridSquares = document.querySelectorAll('.squares');
     const buttonClicked = event.target;
-    console.log(buttonClicked);
 
     gridSquares.forEach(square => {
         square.removeEventListener('click', square.clickListener);
@@ -143,6 +134,14 @@ function handleGridColor(event) {
 }
 
 
+function randomRgbColor() {
+    let r = Math.floor(Math.random() * 255);
+    let g = Math.floor(Math.random() * 255);
+    let b = Math.floor(Math.random() * 255);
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
+}
+
+
 function eraseClickandDrag() {
     let gridSquares = document.querySelectorAll('.squares');
     let isErasing = false;
@@ -170,14 +169,6 @@ function eraseClickandDrag() {
     });
     
     document.addEventListener('mouseup', endErase);
-}
-    
-
-function randomRgbColor() {
-    let r = Math.floor(Math.random() * 255);
-    let g = Math.floor(Math.random() * 255);
-    let b = Math.floor(Math.random() * 255);
-    return 'rgb(' + r + ',' + g + ',' + b + ')';
 }
 
 
@@ -214,7 +205,7 @@ eraser.addEventListener('click', eraseClickandDrag);
 
 let colorBtns = document.querySelectorAll('.colorBtn');
 colorBtns.forEach(button => {
-    button.addEventListener('click', handleGridColor);
+    button.addEventListener('click', handleRandomColor);
 })
 
 
