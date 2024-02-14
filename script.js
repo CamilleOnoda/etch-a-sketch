@@ -55,13 +55,12 @@ function changeBackgroundPen(selectedColorPen) {
             event.target.style.backgroundColor = selectedColorPen;
         };
     }
-
+    
     let clickListener = clickHandler(selectedColorPen);
+    
     gridSquares.forEach(square => {
         square.addEventListener('click', clickListener);
     });
-
-
 }
 
 
@@ -116,7 +115,6 @@ function handleRandomColor(event) {
             const currentColor = square.style.backgroundColor;
             const brightenedColor = brightenColor(currentColor, 10);
             square.addEventListener('click', function() {
-                console.log('Cicked')
                 square.style.backgroundColor = brightenedColor;
             })
         });
@@ -142,8 +140,18 @@ function randomRgbColor() {
 }
 
 
-function eraseClickandDrag() {
+function erasePen() {
     let gridSquares = document.querySelectorAll('.squares');
+        gridSquares.forEach(square => {
+            square.addEventListener('dblclick', () => {
+                square.style.backgroundColor = "";
+            });
+        });
+}
+
+
+function eraseClickandDrag() {
+    const gridSquares = document.querySelectorAll('.squares');
     let isErasing = false;
 
     function startErase() {
@@ -207,6 +215,9 @@ let colorBtns = document.querySelectorAll('.colorBtn');
 colorBtns.forEach(button => {
     button.addEventListener('click', handleRandomColor);
 })
+
+let eraserPen = document.querySelector('#eraserPen');
+eraserPen.addEventListener('click', erasePen);
 
 
 GetGridSize();
