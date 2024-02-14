@@ -146,7 +146,7 @@ function erasePen() {
     let gridSquares = document.querySelectorAll('.squares');
         gridSquares.forEach(square => {
             square.addEventListener('dblclick', () => {
-                square.style.backgroundColor = "";
+                square.style.backgroundColor = "white";
             });
         });
 }
