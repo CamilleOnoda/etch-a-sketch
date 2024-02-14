@@ -55,7 +55,7 @@ function changeBackgroundPen(selectedColorPen) {
             event.target.style.backgroundColor = selectedColorPen;
         };
     }
-    
+
     let clickListener = clickHandler(selectedColorPen);
     
     gridSquares.forEach(square => {
@@ -96,7 +96,7 @@ function changeBackgroundBrush(selectedcolorBrush) {
 
 function handleRandomColor(event) {
     const gridSquares = document.querySelectorAll('.squares');
-    const buttonClicked = event.target;
+    let buttonClicked = event.target;
 
     gridSquares.forEach(square => {
         square.removeEventListener('click', square.clickListener);
@@ -104,19 +104,21 @@ function handleRandomColor(event) {
 
     if(buttonClicked.id === 'darkerColor') {
         gridSquares.forEach(square => {
-            const currentColor = square.style.backgroundColor;
-            const darkenedColor = darkenColor(currentColor, 10);
-            square.addEventListener('click', function() {
+            square.addEventListener('click', function () {
+                let currentColor = square.style.backgroundColor;
+                let darkenedColor = darkenColor(currentColor, 10);
                 square.style.backgroundColor = darkenedColor;
             });
         });
     } else if(buttonClicked.id === 'brighterColor') {
         gridSquares.forEach(square => {
-            const currentColor = square.style.backgroundColor;
-            const brightenedColor = brightenColor(currentColor, 10);
-            square.addEventListener('click', function() {
+            square.addEventListener('click', function () {
+                let currentColor = square.style.backgroundColor;
+                console.log(currentColor);
+                let brightenedColor = brightenColor(currentColor, 10);
+                console.log(brightenedColor);
                 square.style.backgroundColor = brightenedColor;
-            })
+            });
         });
     } else if(buttonClicked.id === 'randomSquare') {
         gridSquares.forEach(square => {
@@ -181,7 +183,8 @@ function eraseClickandDrag() {
 
 
 function darkenColor(color, percent) {
-    const [r, g, b] = color.split(',').map(Number);
+    const components = color.substring(4, color.length - 1).split(',').map(Number);
+    const [r, g, b] = components;
     const darkerR = Math.max(0, Math.floor(r * (1 - percent / 100)));
     const darkerG = Math.max(0, Math.floor(g * (1 - percent / 100)));
     const darkerB = Math.max(0, Math.floor(b * (1 - percent / 100)));
@@ -190,13 +193,13 @@ function darkenColor(color, percent) {
 
 
 function brightenColor(color, percent) {
-    const [r, g, b] = color.split(',').map(Number);
+    const components = color.substring(4, color.length - 1).split(',').map(Number);
+    const [r, g, b] = components;
     const brighterR = Math.min(255, Math.floor(r + (255 - r) * (percent / 100)));
     const brighterG = Math.min(255, Math.floor(g + (255 - g) * (percent / 100)));
     const brighterB = Math.min(255, Math.floor(b + (255 - b) * (percent / 100)));
     return `rgb(${brighterR}, ${brighterG}, ${brighterB})`;
 }
-
 
 
 function restart() {
