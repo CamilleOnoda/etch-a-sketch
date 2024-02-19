@@ -1,6 +1,8 @@
 function GetGridSize() {
     const slideValue = document.querySelector("span");
     const inputSlider = document.querySelector("#size-range");
+    const defaultGridSize = 17;
+    createGrid(defaultGridSize);
 
     inputSlider.oninput = () => {
         let value = inputSlider.value;
@@ -31,41 +33,37 @@ function GetGridSize() {
 };
 
 
-function getSelectedPen(e) {
+function getSelectedPen(event) {
     let colorPen = document.querySelector('#colorPen');
-    let selectedColorPen = e.currentTarget.value;
+    let selectedColorPen = event.currentTarget.value;
     colorPen.value = selectedColorPen;
     changeBackgroundPen(selectedColorPen);
 };
 
 
-function getSelectedBrush(e) {
+function getSelectedBrush(event) {
     let colorBrush = document.querySelector('#colorBrush');
-    let selectedcolorBrush = e.currentTarget.value;
+    let selectedcolorBrush = event.currentTarget.value;
     colorBrush.value = selectedcolorBrush;
     changeBackgroundBrush(selectedcolorBrush);
 };
 
 
 function changeBackgroundPen(selectedColorPen) {
-    let gridSquares = document.querySelectorAll('.squares');
+    const gridSquares = document.querySelectorAll('.squares');
 
-    function clickHandler(selectedColorPen) {
-        return function(event) {
+    function clickHandler(event) {
             event.target.style.backgroundColor = selectedColorPen;
         };
-    }
-
-    let clickListener = clickHandler(selectedColorPen);
     
     gridSquares.forEach(square => {
-        square.addEventListener('click', clickListener);
+        square.addEventListener('click', clickHandler);
     });
 }
 
 
 function changeBackgroundBrush(selectedcolorBrush) {
-    let gridSquares = document.querySelectorAll('.squares');
+    const gridSquares = document.querySelectorAll('.squares');
     let isPainting = false;
 
     function startPaint() {
@@ -94,7 +92,7 @@ function changeBackgroundBrush(selectedcolorBrush) {
 }
 
 
-function handleRandomColor(event) {
+function handleColor(event) {
     const gridSquares = document.querySelectorAll('.squares');
     let buttonClicked = event.target;
 
@@ -216,7 +214,7 @@ eraser.addEventListener('click', eraseClickandDrag);
 
 let colorBtns = document.querySelectorAll('.colorBtn');
 colorBtns.forEach(button => {
-    button.addEventListener('click', handleRandomColor);
+    button.addEventListener('click', handleColor);
 })
 
 let eraserPen = document.querySelector('#eraserPen');
